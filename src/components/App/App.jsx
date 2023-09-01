@@ -12,9 +12,9 @@ export class App extends Component {
       <div>
         <Searchbar />
         <ImageGallery />
+        <Button />
         <Loader />
         <Modal />
-        <Button />
         <GlobalStyle />
       </div>
     );

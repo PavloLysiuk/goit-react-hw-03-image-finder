@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 
 export const Wrapper = styled.div`
+  position: static;
   display: flex;
   justify-content: center;
   padding: 12px 0;
