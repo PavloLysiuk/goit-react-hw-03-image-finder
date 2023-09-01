@@ -10,16 +10,24 @@ export const Wrapper = styled.div`
   background-color: #40bfff;
 `;
 
+export const SearchForm = styled.form`
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+`;
+
 export const SearchInput = styled.input`
-  padding: 0 12px;
-  width: 240px;
+  padding: 0 44px 0 12px;
+  width: 280px;
   height: 32px;
 
   border: none;
-  border-radius: 4px 0 0 4px;
 `;
 
 export const SearchBtn = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 32px;
   height: 32px;
   padding: 4px;
@@ -27,7 +35,6 @@ export const SearchBtn = styled.button`
   cursor: pointer;
 
   border: none;
-  border-radius: 0 4px 4px 0;
 
   background-color: #ffd500;
   transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
