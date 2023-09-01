@@ -1,4 +1,4 @@
-import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+// import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 
 export const ImageGallery = ({ images, setUrl }) => {
   return (
