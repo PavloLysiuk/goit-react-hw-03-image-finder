@@ -5,9 +5,14 @@ export const Searchbar = () => {
   return (
     <Wrapper>
       <form>
-        <SearchInput type="text" placeholder='Search images...' />
+        <SearchInput
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images..."
+        />
       </form>
-      <SearchBtn type="button">
+      <SearchBtn type="submit">
         <GrFormSearch />
       </SearchBtn>
     </Wrapper>
