@@ -1,3 +1,4 @@
+import { GlobalStyle } from 'GlobalStyles';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Loader } from 'components/Loader/Loader';
@@ -12,6 +13,7 @@ export const App = () => {
       <Loader />
       <Modal />
       <Button />
+      <GlobalStyle />
     </div>
   );
 };
