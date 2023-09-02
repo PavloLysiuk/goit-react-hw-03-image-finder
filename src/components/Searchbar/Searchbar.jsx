@@ -6,11 +6,12 @@ import {
 } from './Searchbar.styled';
 import { GrFormSearch } from 'react-icons/gr';
 
-export const Searchbar = () => {
+export const Searchbar = ({onSubmit}) => {
   return (
     <Wrapper>
-      <SearchForm>
+      <SearchForm onSubmit={onSubmit}>
         <SearchInput
+          name="searchQuery"
           type="text"
           autoComplete="off"
           autoFocus
