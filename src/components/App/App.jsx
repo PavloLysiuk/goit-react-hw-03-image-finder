@@ -28,18 +28,30 @@ export class App extends Component {
     this.setState(prevState => ({
       page: prevState.page + 1,
     }));
+
+    // setTimeout(() => {
+    //   window.scrollBy({ top: 400, behavior: 'smooth' });
+    // }, 1000);
   };
 
-  componentDidUpdate = (_, prevState) => {
-    if (
-      prevState.query !== this.state.query ||
-      prevState.page !== this.state.page
-    ) {
-      //http request
+  async componentDidUpdate(_, prevState) {
+    const { page, query } = this.state;
+    if (prevState.query !== query || prevState.page !== page) {
+      try {
+        const data = await fetchImages(query, page);
+        this.setState({ isLoader: true, error: false });
+
+        this.setState(prevState => ({
+          images: [...prevState.images, ...data.hits],
+          page: prevState.page + 1,
+        }));
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        this.setState({ isLoader: false });
+      }
     }
-  };
-
-  // window.scrollBy({ top: 400, behavior: "smooth",});
+  }
 
   render() {
     return (
