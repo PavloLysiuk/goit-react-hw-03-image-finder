@@ -1,9 +1,11 @@
-import { LoadMore } from './Button.styled';
+import { LoadMoreBtn } from './Button.styled';
+import { TbReload } from 'react-icons/tb';
 
 export const Button = ({ onClick }) => {
   return (
-    <LoadMore type="button" onClick={onClick}>
-      Load more...
-    </LoadMore>
+    <LoadMoreBtn type="button" onClick={onClick}>
+      <TbReload />
+      Load more
+    </LoadMoreBtn>
   );
 };

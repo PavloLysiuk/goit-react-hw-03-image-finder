@@ -9,10 +9,15 @@ export const Loader = () => {
       radius="11"
       ariaLabel="mutating-dots-loading"
       wrapperStyle={{
-        position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'fixed',
         left: '50%',
         top: '50%',
         transform: 'translate(-50%, -50%)',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#ffffffa0',
       }}
       wrapperClass=""
       visible={true}
