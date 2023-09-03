@@ -41,7 +41,7 @@ export class App extends Component {
     this.setState({ isLoader: true });
 
     if (this.state.images.length === this.state.totalImages) {
-      toast.info(
+      toast.error(
         "We're sorry, but you've reached the end of the search results"
       );
     }
@@ -55,15 +55,16 @@ export class App extends Component {
     const { page, query } = this.state;
 
     if (prevState.query !== query || prevState.page !== page) {
+      this.setState({ isLoader: true });
       try {
         const data = await fetchImages(query, page);
+
         if (!data.totalHits) {
           this.setState({ totalImages: null });
           return toast.error(
             `There are no ${query} images. Please enter another keyword`
           );
         }
-        this.setState({ isLoader: true });
 
         this.setState(prevState => ({
           images: [...prevState.images, ...data.hits],
@@ -72,16 +73,14 @@ export class App extends Component {
 
         if (this.state.images.length === data.totalHits) {
           this.setState({ totalImages: null });
+          toast.info(`You are reached the end of the ${query}'s gallery`);
         }
-
-        // if (this.state.images.length === data.totalHits) {
-        //   toast.error(`You are reached the end of the ${query}'s gallery`);
-        // }
-
-        // toast.success(`Hurray! we found ${data.totalHits} images for you!`);
+        if (!this.state.totalImages) {
+          toast.success(`Hurray! we found ${data.totalHits} images for you!`);
+        }
       } catch (error) {
         toast.error('Something went wrong!');
-        this.setState({ isLoader: false });
+        // this.setState({ isLoader: false });
       } finally {
         this.setState({ isLoader: false });
       }
