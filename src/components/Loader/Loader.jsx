@@ -1,26 +1,31 @@
-import { MutatingDots } from 'react-loader-spinner';
+import { ProgressBar } from 'react-loader-spinner';
+
 export const Loader = () => {
   return (
-    <MutatingDots
-      height="100"
-      width="100"
-      color="#ffc800"
-      secondaryColor="#40bfff"
-      radius="11"
-      ariaLabel="mutating-dots-loading"
+    // <MutatingDots
+    //   height="100"
+    //   width="100"
+    //   color="#ffc800"
+    //   secondaryColor="#40bfff"
+    //   radius="11"
+    //   ariaLabel="mutating-dots-loading"
+    //   wrapperStyle={{
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //   }}
+    //   wrapperClass=""
+    //   visible={true}
+    // />
+    <ProgressBar
       wrapperStyle={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'fixed',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#ffffffa0',
+        margin: '-40px auto 0',
+        display: 'flex',
       }}
-      wrapperClass=""
-      visible={true}
+      width="110"
+      height="110"
+      ariaLabel="progress-bar-loading"
+      borderColor="#40bfff"
+      barColor="#ffc800"
     />
   );
 };

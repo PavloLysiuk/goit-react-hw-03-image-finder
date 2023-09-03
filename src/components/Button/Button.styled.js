@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 export const LoadMoreBtn = styled.button`
-  margin: 24px auto;
+  margin: 0 auto 24px;
   padding: 0 0 0 12px;
 
   display: flex;
@@ -31,7 +31,8 @@ export const LoadMoreBtn = styled.button`
     color: white;
     background-color: #3fbfff;
 
-    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+      rotate 200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &:hover {
@@ -39,6 +40,7 @@ export const LoadMoreBtn = styled.button`
   }
 
   &:hover svg {
+    rotate: 180deg;
     background-color: #00aaff;
   }
 `;

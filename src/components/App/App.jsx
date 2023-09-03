@@ -13,6 +13,7 @@ export class App extends Component {
     query: '',
     images: [],
     page: 1,
+    totalImages: null,
     isLoader: false,
   };
 
@@ -39,6 +40,12 @@ export class App extends Component {
 
     this.setState({ isLoader: true });
 
+    if (this.state.images.length === this.state.totalImages) {
+      toast.info(
+        "We're sorry, but you've reached the end of the search results"
+      );
+    }
+
     setTimeout(() => {
       window.scrollBy({ top: 800, behavior: 'smooth' });
     }, 1000);
@@ -50,13 +57,28 @@ export class App extends Component {
     if (prevState.query !== query || prevState.page !== page) {
       try {
         const data = await fetchImages(query, page);
+        if (!data.totalHits) {
+          this.setState({ totalImages: null });
+          return toast.error(
+            `There are no ${query} images. Please enter another keyword`
+          );
+        }
         this.setState({ isLoader: true });
 
         this.setState(prevState => ({
           images: [...prevState.images, ...data.hits],
+          totalImages: data.totalHits,
         }));
 
-        toast.success(`Hurray! we found ${data.totalHits} images for you!`);
+        if (this.state.images.length === data.totalHits) {
+          this.setState({ totalImages: null });
+        }
+
+        // if (this.state.images.length === data.totalHits) {
+        //   toast.error(`You are reached the end of the ${query}'s gallery`);
+        // }
+
+        // toast.success(`Hurray! we found ${data.totalHits} images for you!`);
       } catch (error) {
         toast.error('Something went wrong!');
         this.setState({ isLoader: false });
@@ -74,6 +96,7 @@ export class App extends Component {
           <ImageGallery images={this.state.images} />
         )}
         {this.state.images.length > 0 &&
+          this.state.totalImages &&
           this.state.images &&
           !this.state.isLoader && <Button onClick={this.handleLoadMore} />}
         {this.state.isLoader && <Loader />}

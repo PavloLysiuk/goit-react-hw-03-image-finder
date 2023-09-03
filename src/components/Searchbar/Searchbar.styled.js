@@ -42,7 +42,8 @@ export const SearchBtn = styled.button`
   border-radius: 50%;
 
   background-color: #ffd500;
-  transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    rotate 200ms cubic-bezier(0.4, 0, 0.2, 1);
 
   svg {
     width: 24px;
@@ -56,5 +57,6 @@ export const SearchBtn = styled.button`
 
   &:hover {
     background-color: #ffc800;
+    rotate: 90deg;
   }
 `;
