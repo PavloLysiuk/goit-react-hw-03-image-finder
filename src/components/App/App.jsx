@@ -24,6 +24,7 @@ export class App extends Component {
       });
       return;
     }
+
     this.setState({
       query: e.target.elements.searchQuery.value,
       images: [],
@@ -53,16 +54,11 @@ export class App extends Component {
 
         this.setState(prevState => ({
           images: [...prevState.images, ...data.hits],
-          // page: prevState.page + 1,
         }));
 
-        toast.success(`Hurray! we found ${data.totalHits} images for you!`, {
-          duration: 3000,
-        });
+        toast.success(`Hurray! we found ${data.totalHits} images for you!`);
       } catch (error) {
-        toast.error('Something went wrong', {
-          duration: 3000,
-        });
+        toast.error('Something went wrong!');
         this.setState({ isLoader: false });
       } finally {
         this.setState({ isLoader: false });
