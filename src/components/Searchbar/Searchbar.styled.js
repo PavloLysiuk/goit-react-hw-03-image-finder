@@ -1,27 +1,30 @@
 import { styled } from 'styled-components';
 
 export const Wrapper = styled.div`
-  position: static;
+  position: fixed;
+  z-index: 999;
   display: flex;
+  top: 0;
   justify-content: center;
   padding: 12px 0;
   width: 100%;
 
   border-bottom: 3px solid #ffd500;
-  background-color: #40bfff;
+  background-color: #17b2ffe0;
 `;
 
 export const SearchForm = styled.form`
   position: relative;
-  border-radius: 4px;
+  border-radius: 16px;
   overflow: hidden;
+
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
 `;
 
 export const SearchInput = styled.input`
   padding: 0 44px 0 12px;
   width: 280px;
   height: 32px;
-
   border: none;
 `;
 
@@ -36,6 +39,7 @@ export const SearchBtn = styled.button`
   cursor: pointer;
 
   border: none;
+  border-radius: 50%;
 
   background-color: #ffd500;
   transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);

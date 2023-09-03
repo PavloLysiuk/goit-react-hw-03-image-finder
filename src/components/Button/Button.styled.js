@@ -13,7 +13,7 @@ export const LoadMoreBtn = styled.button`
   height: 32px;
 
   border: none;
-  border-radius: 4px;
+  border-radius: 16px;
 
   background-color: #ffd500;
 
@@ -27,7 +27,7 @@ export const LoadMoreBtn = styled.button`
 
     width: 32px;
     height: 32px;
-
+    border-radius: 50%;
     color: white;
     background-color: #3fbfff;
 
