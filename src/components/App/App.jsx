@@ -93,18 +93,19 @@ export class App extends Component {
   }
 
   render() {
+    const { images, totalImages, isLoader } = this.state;
     return (
       <div>
         <Searchbar onSubmit={this.handleSubmit} />
         {this.state.images.length > 0 && (
           <ImageGallery images={this.state.images} />
         )}
-        {this.state.images.length > 0 &&
-          this.state.images.length !== this.state.totalImages &&
-          this.state.totalImages &&
-          this.state.images &&
-          !this.state.isLoader && <Button onClick={this.handleLoadMore} />}
-        {this.state.isLoader && <Loader />}
+        {images.length > 0 &&
+          images.length !== totalImages &&
+          totalImages &&
+          images &&
+          !isLoader && <Button onClick={this.handleLoadMore} />}
+        {isLoader && <Loader />}
         <Modal />
         <Toaster
           gutter={4}
