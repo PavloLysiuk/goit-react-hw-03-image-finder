@@ -38,9 +38,14 @@ export class App extends Component {
       page: prevState.page + 1,
     }));
 
-    this.setState({ isLoader: true });
+    setTimeout(() => {
+      window.scrollBy({ top: 800, behavior: 'smooth' });
+    }, 1000);
 
-    if (this.state.images.length === this.state.totalImages) {
+    const { images, totalImages } = this.state;
+
+    console.log(images.length);
+    if (images.length + 12 >= totalImages) {
       toast.error(
         `We are sorry, but you have reached the end of the search results`,
         {
@@ -48,10 +53,6 @@ export class App extends Component {
         }
       );
     }
-
-    setTimeout(() => {
-      window.scrollBy({ top: 800, behavior: 'smooth' });
-    }, 1000);
   };
 
   async componentDidUpdate(_, prevState) {
@@ -97,11 +98,9 @@ export class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={this.handleSubmit} />
-        {this.state.images.length > 0 && (
-          <ImageGallery images={this.state.images} />
-        )}
+        {images.length > 0 && <ImageGallery images={images} />}
         {images.length > 0 &&
-          images.length !== totalImages &&
+          images.length < totalImages &&
           totalImages &&
           images &&
           !isLoader && <Button onClick={this.handleLoadMore} />}
