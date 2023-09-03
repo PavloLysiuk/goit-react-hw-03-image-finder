@@ -19,7 +19,7 @@ export class App extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (e.target.elements.searchQuery.value === '') {
+    if (e.target.elements.searchQuery.value.trim() === '') {
       toast.error('Please enter a valid query', {
         duration: 3000,
       });
@@ -42,7 +42,7 @@ export class App extends Component {
 
     if (this.state.images.length === this.state.totalImages) {
       toast.error(
-        "We're sorry, but you've reached the end of the search results"
+        `We are sorry, but you have reached the end of the search results`
       );
     }
 
@@ -71,16 +71,11 @@ export class App extends Component {
           totalImages: data.totalHits,
         }));
 
-        if (this.state.images.length === data.totalHits) {
-          this.setState({ totalImages: null });
-          toast.info(`You are reached the end of the ${query}'s gallery`);
-        }
         if (!this.state.totalImages) {
           toast.success(`Hurray! we found ${data.totalHits} images for you!`);
         }
       } catch (error) {
         toast.error('Something went wrong!');
-        // this.setState({ isLoader: false });
       } finally {
         this.setState({ isLoader: false });
       }
@@ -95,6 +90,7 @@ export class App extends Component {
           <ImageGallery images={this.state.images} />
         )}
         {this.state.images.length > 0 &&
+          this.state.images.length !== this.state.totalImages &&
           this.state.totalImages &&
           this.state.images &&
           !this.state.isLoader && <Button onClick={this.handleLoadMore} />}

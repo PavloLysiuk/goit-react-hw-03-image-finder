@@ -26,6 +26,7 @@ export const SearchInput = styled.input`
   width: 280px;
   height: 32px;
   border: none;
+  outline: none;
 `;
 
 export const SearchBtn = styled.button`
