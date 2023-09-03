@@ -42,7 +42,10 @@ export class App extends Component {
 
     if (this.state.images.length === this.state.totalImages) {
       toast.error(
-        `We are sorry, but you have reached the end of the search results`
+        `We are sorry, but you have reached the end of the search results`,
+        {
+          duration: 3000,
+        }
       );
     }
 
@@ -62,7 +65,10 @@ export class App extends Component {
         if (!data.totalHits) {
           this.setState({ totalImages: null });
           return toast.error(
-            `There are no ${query} images. Please enter another keyword`
+            `There are no ${query} images. Please enter another keyword`,
+            {
+              duration: 3000,
+            }
           );
         }
 
@@ -72,10 +78,14 @@ export class App extends Component {
         }));
 
         if (!this.state.totalImages) {
-          toast.success(`Hurray! we found ${data.totalHits} images for you!`);
+          toast.success(`Hurray! we found ${data.totalHits} images for you!`, {
+            duration: 3000,
+          });
         }
       } catch (error) {
-        toast.error('Something went wrong!');
+        toast.error('Something went wrong!', {
+          duration: 3000,
+        });
       } finally {
         this.setState({ isLoader: false });
       }
@@ -107,7 +117,7 @@ export class App extends Component {
                 minWidth: '280px',
                 height: '56px',
                 color: 'white',
-                background: '#00aaff',
+                background: '#0093dc',
               },
             },
             error: {
