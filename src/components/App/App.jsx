@@ -20,7 +20,9 @@ export class App extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (e.target.elements.searchQuery.value.trim() === '') {
+    const searchQuery = e.target.elements.searchQuery.value.trim();
+
+    if (searchQuery === '') {
       toast.error('Please enter a valid query', {
         duration: 3000,
       });
@@ -28,7 +30,7 @@ export class App extends Component {
     }
 
     this.setState({
-      query: e.target.elements.searchQuery.value,
+      query: searchQuery,
       images: [],
       page: 1,
     });
