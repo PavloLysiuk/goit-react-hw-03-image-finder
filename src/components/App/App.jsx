@@ -26,6 +26,7 @@ export class App extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const searchQuery = e.target.elements.searchQuery.value.trim();
+    // const searchQuery = `${Date.now()}/${e.target.elements.searchQuery.value}`;
 
     if (searchQuery === '') {
       toast.error('Please enter a valid query', {
