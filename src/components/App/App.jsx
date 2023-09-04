@@ -15,7 +15,12 @@ export class App extends Component {
     page: 1,
     perPage: 12,
     totalImages: null,
+    largeImageData: {
+      largeImageURL: '',
+      tags: '',
+    },
     isLoader: false,
+    isModal: false,
   };
 
   handleSubmit = e => {
@@ -33,6 +38,12 @@ export class App extends Component {
       query: searchQuery,
       images: [],
       page: 1,
+      largeImageData: {
+        largeImageURL: '',
+        tags: '',
+      },
+      isLoader: false,
+      isModal: false,
     });
   };
 
@@ -55,6 +66,14 @@ export class App extends Component {
         }
       );
     }
+  };
+
+  handleModalOpen = largeImage => {
+    this.setState({ largeImageData: largeImage, isModal: true });
+  };
+
+  handleModalClose = () => {
+    this.setState({ largeImage: '', isModal: false });
   };
 
   async componentDidUpdate(_, prevState) {
@@ -96,18 +115,27 @@ export class App extends Component {
   }
 
   render() {
-    const { images, totalImages, isLoader } = this.state;
+    const { images, totalImages, largeImageData, isLoader, isModal } =
+      this.state;
     return (
       <div>
         <Searchbar onSubmit={this.handleSubmit} />
-        {images.length > 0 && <ImageGallery images={images} />}
+        {images.length > 0 && (
+          <ImageGallery images={images} openModal={this.handleModalOpen} />
+        )}
         {images.length > 0 &&
           images.length < totalImages &&
           totalImages &&
           images &&
           !isLoader && <Button onClick={this.handleLoadMore} />}
         {isLoader && <Loader />}
-        <Modal />
+        {isModal && (
+          <Modal
+            picture={largeImageData}
+            onClose={this.handleModalClose}
+            isOpen={isModal}
+          />
+        )}
         <Toaster
           gutter={4}
           containerStyle={{
