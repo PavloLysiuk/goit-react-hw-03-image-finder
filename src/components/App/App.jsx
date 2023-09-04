@@ -13,6 +13,7 @@ export class App extends Component {
     query: '',
     images: [],
     page: 1,
+    perPage: 12,
     totalImages: null,
     isLoader: false,
   };
@@ -42,9 +43,9 @@ export class App extends Component {
       window.scrollBy({ top: 800, behavior: 'smooth' });
     }, 1000);
 
-    const { images, totalImages } = this.state;
+    const { images, perPage, totalImages } = this.state;
 
-    if (images.length + 12 >= totalImages) {
+    if (images.length + perPage >= totalImages) {
       toast.error(
         `We are sorry, but you have reached the end of the search results`,
         {
@@ -55,12 +56,12 @@ export class App extends Component {
   };
 
   async componentDidUpdate(_, prevState) {
-    const { page, query } = this.state;
+    const { page, perPage, query } = this.state;
 
     if (prevState.query !== query || prevState.page !== page) {
       this.setState({ isLoader: true });
       try {
-        const data = await fetchImages(query, page);
+        const data = await fetchImages(query, page, perPage);
 
         if (!data.totalHits) {
           this.setState({ totalImages: null });
