@@ -44,7 +44,6 @@ export class App extends Component {
 
     const { images, totalImages } = this.state;
 
-    console.log(images.length);
     if (images.length + 12 >= totalImages) {
       toast.error(
         `We are sorry, but you have reached the end of the search results`,
