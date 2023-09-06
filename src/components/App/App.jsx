@@ -21,6 +21,7 @@ export class App extends Component {
     },
     isLoader: false,
     isModal: false,
+    hasFetchedData: false,
   };
 
   formatQuery() {
@@ -53,6 +54,7 @@ export class App extends Component {
       },
       isLoader: false,
       isModal: false,
+      hasFetchedData: false,
     });
   };
 
@@ -86,31 +88,39 @@ export class App extends Component {
   };
 
   async componentDidUpdate(_, prevState) {
-    const { page, perPage, query } = this.state;
+    const { page, perPage, query, hasFetchedData } = this.state;
 
     if (prevState.query !== query || prevState.page !== page) {
       this.setState({ isLoader: true });
+
       try {
         const data = await fetchImages(this.formatQuery(), page, perPage);
 
         if (!data.totalHits) {
           this.setState({ totalImages: null });
-          return toast.error(
+          toast.error(
             `There are no ${this.formatQuery()} images. Please enter another keyword`,
             {
               duration: 3000,
             }
           );
+        } else {
+          this.setState(prevState => ({
+            images: [...prevState.images, ...data.hits],
+            totalImages: data.totalHits,
+          }));
+
+          if (!hasFetchedData) {
+            toast.success(
+              `Hurray! we found ${data.totalHits} images for you!`,
+              {
+                duration: 3000,
+              }
+            );
+
+            this.setState({ hasFetchedData: true });
+          }
         }
-
-        this.setState(prevState => ({
-          images: [...prevState.images, ...data.hits],
-          totalImages: data.totalHits,
-        }));
-
-        toast.success(`Hurray! we found ${data.totalHits} images for you!`, {
-          duration: 3000,
-        });
       } catch (error) {
         toast.error('Something went wrong!', {
           duration: 3000,
