@@ -1,8 +1,7 @@
-// import { ModalReact, Image } from './Modal.styled';
 import ReactModal from 'react-modal';
 
-export const Modal = ({ picture, onClose, isOpen }) => {
-  const { largeImageURL, tags } = picture;
+export const Modal = ({ image, onClose, isOpen }) => {
+  const { largeImageURL, tags } = image;
   const styles = {
     overlay: {
       display: 'flex',
@@ -14,8 +13,9 @@ export const Modal = ({ picture, onClose, isOpen }) => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      maxWidth: 'calc(100vw - 48px)',
-      maxHeight: 'calc(100vh - 48px)',
+      maxWidth: 'calc(100vw - 60px)',
+      maxHeight: 'calc(100vh - 60px)',
+      padding: '0',
       border: 'none',
       borderRadius: '16px',
       position: 'revert',

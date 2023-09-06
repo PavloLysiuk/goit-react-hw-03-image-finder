@@ -23,10 +23,18 @@ export class App extends Component {
     isModal: false,
   };
 
+  formatQuery() {
+    const { query } = this.state;
+    const index = query.indexOf('/');
+    if (index >= 0) {
+      return query.slice(index + 1);
+    }
+    return query;
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     const searchQuery = e.target.elements.searchQuery.value.trim();
-    // const searchQuery = `${Date.now()}/${e.target.elements.searchQuery.value}`;
 
     if (searchQuery === '') {
       toast.error('Please enter a valid query', {
@@ -36,7 +44,7 @@ export class App extends Component {
     }
 
     this.setState({
-      query: searchQuery,
+      query: `${Date.now()}/${e.target.elements.searchQuery.value}`,
       images: [],
       page: 1,
       largeImageData: {
@@ -83,12 +91,12 @@ export class App extends Component {
     if (prevState.query !== query || prevState.page !== page) {
       this.setState({ isLoader: true });
       try {
-        const data = await fetchImages(query, page, perPage);
+        const data = await fetchImages(this.formatQuery(), page, perPage);
 
         if (!data.totalHits) {
           this.setState({ totalImages: null });
           return toast.error(
-            `There are no ${query} images. Please enter another keyword`,
+            `There are no ${this.formatQuery()} images. Please enter another keyword`,
             {
               duration: 3000,
             }
@@ -100,11 +108,9 @@ export class App extends Component {
           totalImages: data.totalHits,
         }));
 
-        if (!this.state.totalImages) {
-          toast.success(`Hurray! we found ${data.totalHits} images for you!`, {
-            duration: 3000,
-          });
-        }
+        toast.success(`Hurray! we found ${data.totalHits} images for you!`, {
+          duration: 3000,
+        });
       } catch (error) {
         toast.error('Something went wrong!', {
           duration: 3000,
@@ -132,7 +138,7 @@ export class App extends Component {
         {isLoader && <Loader />}
         {isModal && (
           <Modal
-            picture={largeImageData}
+            image={largeImageData}
             onClose={this.handleModalClose}
             isOpen={isModal}
           />
